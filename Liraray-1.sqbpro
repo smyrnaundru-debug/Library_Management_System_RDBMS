@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="Liraray-1.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2240"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="Loan" custom_title="0" dock_id="1" table="4,4:mainLoan"/><dock_state state="000000ff00000000fd00000001000000020000024800000211fc0100000001fb000000160064006f0063006b00420072006f00770073006500310100000000000002480000015c00ffffff000002480000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Books" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="57"/><column index="2" value="187"/><column index="3" value="156"/><column index="4" value="234"/><column index="5" value="77"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Fines" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="52"/><column index="2" value="58"/><column index="3" value="52"/><column index="4" value="131"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Loan" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="56"/><column index="2" value="58"/><column index="3" value="75"/><column index="4" value="59"/><column index="5" value="85"/><column index="6" value="85"/><column index="7" value="70"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="STAFF" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="56"/><column index="2" value="74"/><column index="3" value="156"/><column index="4" value="95"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Student" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="73"/><column index="2" value="93"/><column index="3" value="75"/><column index="4" value="54"/><column index="5" value="93"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Supplier" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="75"/><column index="2" value="93"/><column index="3" value="78"/><column index="4" value="85"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1*">SELECT Student_ID,Student_Name,Department 
+FROM Student 
+WHERE Department LIKE 'BCA';
+
+SELECT Department,COUNT(Student_ID) AS Total_Students 
+FROM Student 
+GROUP BY Department 
+HAVING COUNT(Student_ID)&gt;2;
+
+SELECT*FROM Books ORDER BY Title; 
+
+SELECT s.Student_Name,b.Title,l.Status 
+FROM Loan l 
+INNER JOIN Student s ON s.Student_ID=l.Student_ID 
+INNER JOIN Books b ON b.Book_ID=l.Book_ID; 
+
+SELECT b.Title, b.Author, s.Supplier_Name 
+FROM Books b 
+LEFT JOIN Supplier s ON b.Supplier_ID=s.Supplier_ID;
+
+SELECT s.Supplier_Name , b.Title 
+FROM Supplier s 
+RIGHT JOIN Books b ON s.Supplier_ID=b.Supplier_ID; 
+
+SELECT Books.Title, Supplier.Supplier_Name 
+FROM Books
+FULL OUTER JOIN Supplier ON Books.Supplier_ID = Supplier.Supplier_ID; 
+
+SELECT Student_Name 
+FROM Student 
+WHERE Student_ID IN ( 
+SELECT Student_ID 
+FROM Loan); 
+
+SELECT SUM(Amount) AS Total_Fine_Revenue, 
+AVG(Amount) AS Average_Fine, 
+COUNT(Fine_ID) AS Total_Fine_Records 
+FROM Fines;
+
+UPDATE Loan 
+SET Status='Returned',Return_Date='2026-05-05' 
+WHERE Loan_ID=111; 
+select*from Loan;
+
+DELETE FROM STAFF WHERE Staff_ID=110; 
+select*from STAFF;
+
+
+BEGIN TRANSACTION; 
+UPDATE Loan SET Status = 'Borrowed' WHERE Loan_ID = 120;
+UPDATE Loan SET Status = 'Returned' WHERE Loan_ID = 119;
+COMMIT;
+SELECT * FROM Loan;
+
+BEGIN TRANSACTION;
+UPDATE Fines SET Amount = Amount - 100 WHERE Fine_ID = 121;
+COMMIT;
+
+BEGIN TRANSACTION;
+UPDATE Fines SET Amount = Amount + 500 WHERE Fine_ID = 122;
+COMMIT;
+SELECT * FROM Fines;
+
+SELECT SUM(Amount) FROM Fines;
+
+UPDATE Loan
+SET Status = 'Returned'
+WHERE Loan_ID = 116;
+SELECT * FROM Loan;
+
+SELECT * FROM STAFF WHERE Staff_Role LIKE 'Assistant';
+
+SELECT s.Student_ID,s.Student_Name,l.Status,COUNT(l.Status) AS 'Total Borrowed'
+FROM Student s
+INNER JOIN Loan l ON s.Student_ID=l.Student_ID
+WHERE l.Status == 'Borrowed'
+GROUP BY s.Student_ID;
+
+SELECT s.Student_Name, b.Title, l.Return_Date, f.Paid_Status
+FROM Fines f
+INNER JOIN Loan l ON f.Loan_ID=l.Loan_ID
+INNER JOIN Books b ON l.Book_ID=b.Book_ID
+INNER JOIN Student s ON l.Student_ID=s.Student_ID
+WHERE f.Paid_Status == 'Pending';
+
+SELECT * FROM Books ORDER BY Title DESC;
+
+
+</sql><current_tab id="0"/></tab_sql></sqlb_project>

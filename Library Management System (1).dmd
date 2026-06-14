@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="Library Management System" id="4687FEEF-2E15-BC37-8130-82B5EC05824C" version="3.5">
+<createdBy>uajar</createdBy>
+<createdTime>2026-04-29 13:42:33 UTC</createdTime>
+<ownerDesignName>Project Library Database</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>4687FEEF-2E15-BC37-8130-82B5EC05824C</designId>
+</OSDM_Design>
