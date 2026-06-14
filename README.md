@@ -4,7 +4,11 @@ The major outcomes can be all library operations are in one centralized platform
 
 Project Objectives:
 1.Design an ER model for the selected business scenario.
+
 2.Convert the ER model into a normalized relational model.
+
 3.Implement tables, constraints, and sample data using SSMS / SQLite.
+
 4.Write SQL queries for retrieval and data manipulation.
+
 5.Demonstrate transactions, rollback, commit, backup, recovery, and storage concepts.
