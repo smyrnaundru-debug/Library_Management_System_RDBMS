@@ -3,8 +3,8 @@ The tools used here are Oracle SQL Data Modular for Data flow diagram and ER mod
 The major outcomes can be all library operations are in one centralized platform , better record maintenance compared to traditional file system , reduce time and cost-saving and enhancing user experience through easily accessing the information.
 
 Project Objectives:
-Design an ER model for the selected business scenario.
-Convert the ER model into a normalized relational model.
-Implement tables, constraints, and sample data using SSMS / SQLite.
-Write SQL queries for retrieval and data manipulation.
-Demonstrate transactions, rollback, commit, backup, recovery, and storage concepts.
+1.Design an ER model for the selected business scenario.
+2.Convert the ER model into a normalized relational model.
+3.Implement tables, constraints, and sample data using SSMS / SQLite.
+4.Write SQL queries for retrieval and data manipulation.
+5.Demonstrate transactions, rollback, commit, backup, recovery, and storage concepts.
