@@ -3,6 +3,7 @@ The tools used here are Oracle SQL Data Modular for Data flow diagram and ER mod
 The major outcomes can be all library operations are in one centralized platform , better record maintenance compared to traditional file system , reduce time and cost-saving and enhancing user experience through easily accessing the information.
 
 Project Objectives:
+
 1.Design an ER model for the selected business scenario.
 
 2.Convert the ER model into a normalized relational model.
